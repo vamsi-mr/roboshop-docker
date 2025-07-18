@@ -4,10 +4,10 @@ networks:
     name: roboshop
 services:
   mongodb:
-    image: mohanvamsi011/mongodb:v1
+    image: mongodb:v1
     container_name: mongodb
   catalogue:
-    image: mohanvamsi011/catalogue:v1
+    image: catalogue:v1
     container_name: catalogue
     depends_on:
       - mongodb
@@ -15,38 +15,38 @@ services:
     image: redis:7.0
     container_name: redis
   user:
-    image: mohanvamsi011/user:v1
+    image: user:v1
     container_name: user
     depends_on:
       - redis
       - mongodb
   cart:
-    image: mohanvamsi011/cart:v1
+    image: cart:v1
     container_name: cart
     depends_on:
       - catalogue
       - redis
   mysql:
-    image: mohanvamsi011/mysql:v1
+    image: mysql:v1
     container_name: mysql 
   shipping:
-    image: mohanvamsi011/shipping:v1
+    image: shipping:v1
     container_name: shipping
     depends_on:
       - mysql
       - cart
   rabbitmq:
-    image: mohanvamsi011/rabbitmq:v1
+    image: rabbitmq:v1
     container_name: rabbitmq
   payment:
-    image: mohanvamsi011/payment:v1
+    image: payment:v1
     container_name: payment
     depends_on:
       - rabbitmq
       - user
       - cart
   frontend:
-    image: mohanvamsi011/frontend:v1
+    image: frontend:v1
     container_name: frontend
     depends_on:
       - catalogue
