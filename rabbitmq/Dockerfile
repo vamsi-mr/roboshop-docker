@@ -1,0 +1,3 @@
+FROM rabbitmq:3
+ENV RABBITMQ_DEFAULT_USER="roboshop" \
+    RABBITMQ_DEFAULT_PASSWORD="roboshop123"
