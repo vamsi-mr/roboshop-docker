@@ -13,7 +13,7 @@ services:
     image: mohanvamsi011/mongodb:v1
     container_name: mongodb
     volumes:
-      - mongodb: /data/db
+      - mongodb:/data/db
   catalogue:
     image: mohanvamsi011/catalogue:v1
     container_name: catalogue
@@ -23,7 +23,7 @@ services:
     image: redis:7.0
     container_name: redis
     volumes:
-      - redis: /data
+      - redis:/data
   user:
     image: mohanvamsi011/user:v1
     container_name: user
@@ -40,7 +40,7 @@ services:
     image: mohanvamsi011/mysql:v1
     container_name: mysql 
     volumes:
-      - mysql: /var/lib/mysql
+      - mysql:/var/lib/mysql
   shipping:
     image: mohanvamsi011/shipping:v1
     container_name: shipping
@@ -51,7 +51,7 @@ services:
     image: mohanvamsi011/rabbitmq:v1
     container_name: rabbitmq
     volumes:
-      - rabbitmq: /var/lib/rabbitmq
+      - rabbitmq:/var/lib/rabbitmq
   payment:
     image: mohanvamsi011/payment:v1
     container_name: payment
