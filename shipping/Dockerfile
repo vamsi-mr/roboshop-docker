@@ -14,6 +14,7 @@
 ### Image Builder
 FROM maven AS bullder
 WORKDIR /opt/server
+COPY pom.xml .
 COPY src /opt/server/src
 COPY pom.xml /opt/server/
 RUN mvn clean package 
