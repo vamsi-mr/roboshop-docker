@@ -24,8 +24,8 @@ ENV MONGO="true" \
     MONGO_URL="mongodb://mongodb:27017/users" \
     REDIS_RUL="redis://redis:6379"
 WORKDIR /opt/server
-RUN chown -R roboshop:roboshop /opt/server
 USER roboshop
 COPY --from=builder /opt/server /opt/server
+RUN chown -R roboshop:roboshop /opt/server
 CMD [ "node", "server.js" ]
 
