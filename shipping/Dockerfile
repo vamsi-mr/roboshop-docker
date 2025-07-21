@@ -12,7 +12,7 @@
 
 ### Multi Stage Docker Build
 ### Image Builder
-FROM maven AS bullder
+FROM maven AS builder
 WORKDIR /opt/server
 COPY pom.xml .
 COPY src /opt/server/src
@@ -26,5 +26,5 @@ RUN addgroup -S roboshop && adduser -S roboshop -G roboshop
 ENV CART_ENDPOINT="cart:8080" \
     DB_HOST="mysql"
 USER roboshop
-COPY --from=builder /opt/server/target/shipping-*.jar /opt/server/shipping.jar
+COPY --chown=roboshop:roboshop --from=builder /opt/server/target/shipping-*.jar /opt/server/shipping.jar
 CMD [ "java", "-jar", "shipping.jar" ]
