@@ -30,26 +30,26 @@ CMD ["uwsgi", "--ini", "payment.ini"]
 
 
 
-# -------------------
-# Stage 1: Build
-# -------------------
-FROM python:3.9.23-alpine3.22 AS builder
-WORKDIR /opt/server
-COPY requirements.txt .
-COPY *.py .
-COPY package.ini .
-RUN pip3 install -r requirements.txt
+# # -------------------
+# # Stage 1: Build
+# # -------------------
+# FROM python:3.9.23-alpine3.22 AS builder
+# WORKDIR /opt/server
+# COPY requirements.txt .
+# COPY *.py .
+# COPY package.ini .
+# RUN pip3 install -r requirements.txt
 
-# --------------------
-# Stage 2: Final image
-# --------------------
-FROM python:3.9.23-alpine3.22
-EXPOSE 8080
-RUN addgroup -S roboshop && adduser -S roboshop -G roboshop
-WORKDIR /opt/server
-USER roboshop
-COPY --chown=roboshop:roboshop --from=builder /opt/server /opt/server/
-CMD [ "uwsgi", "--ini", "payment.ini" ]
+# # --------------------
+# # Stage 2: Final image
+# # --------------------
+# FROM python:3.9.23-alpine3.22
+# EXPOSE 8080
+# RUN addgroup -S roboshop && adduser -S roboshop -G roboshop
+# WORKDIR /opt/server
+# USER roboshop
+# COPY --chown=roboshop:roboshop --from=builder /opt/server /opt/server/
+# CMD [ "uwsgi", "--ini", "payment.ini" ]
 
 
 
