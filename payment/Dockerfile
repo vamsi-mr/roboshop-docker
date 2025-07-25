@@ -29,6 +29,7 @@ CMD ["uwsgi", "--ini", "payment.ini"]
 
 
 
+
 # FROM python:3.9
 # EXPOSE 8080
 # WORKDIR /opt/server
@@ -44,4 +45,3 @@ CMD ["uwsgi", "--ini", "payment.ini"]
 #     AMQP_USER="roboshop" \
 #     AMQP_PASSWORD="roboshop123"
 # CMD [ "uwsgi", "--ini", "payment.ini" ]
-

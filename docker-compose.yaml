@@ -14,51 +14,67 @@ services:
     container_name: mongodb
     volumes:
       - mongodb:/data/db
+      
   catalogue:
     image: mohanvamsi011/catalogue:v1
     container_name: catalogue
     depends_on:
       - mongodb
+
   redis:
     image: redis:7.0
     container_name: redis
     volumes:
       - redis:/data
+      
   user:
     image: mohanvamsi011/user:v1
     container_name: user
     depends_on:
       - redis
       - mongodb
+
   cart:
     image: mohanvamsi011/cart:v1
     container_name: cart
     depends_on:
       - catalogue
       - redis
+
   mysql:
     image: mohanvamsi011/mysql:v1
     container_name: mysql 
     volumes:
       - mysql:/var/lib/mysql
+
   shipping:
     image: mohanvamsi011/shipping:v1
     container_name: shipping
     depends_on:
       - mysql
       - cart
+
   rabbitmq:
-    image: mohanvamsi011/rabbitmq:v1
+    image: rabbitmq:3
     container_name: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: roboshop
+      RABBITMQ_DEFAULT_PASS: roboshop123
     volumes:
       - rabbitmq:/var/lib/rabbitmq
+
   payment:
     image: mohanvamsi011/payment:v1
     container_name: payment
-    depends_on:
-      - rabbitmq
-      - user
-      - cart
+    environment:
+    CART_HOST: cart
+    CART_PORT: 8080
+    USER_HOST: user
+    USER_PORT: 8080
+    AMQP_HOST: rabbitmq
+    AMQP_USER: roboshop
+    AMQP_PASS: roboshop123
+
   frontend:
     image: mohanvamsi011/frontend:v1
     container_name: frontend
