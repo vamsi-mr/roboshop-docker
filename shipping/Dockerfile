@@ -4,9 +4,10 @@
 FROM maven AS builder
 WORKDIR /opt/server
 COPY pom.xml .
-COPY src /opt/server/src
-COPY pom.xml /opt/server/
-RUN mvn clean package 
+RUN mvn dependency:go-offline
+COPY src ./src
+RUN mvn clean package
+
 
 
 # --------------------
